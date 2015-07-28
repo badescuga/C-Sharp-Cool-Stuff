@@ -36,7 +36,7 @@ namespace ConsoleApplication2
         }
         public string First { get; } = "Jane";
         //call direct 
-        public static async void F() => Console.WriteLine("Lambda method call");
+        public static void F() => Console.WriteLine("Lambda method call");
         
 
         //async task stuff
