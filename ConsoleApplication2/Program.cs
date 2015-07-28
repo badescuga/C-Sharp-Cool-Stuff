@@ -15,14 +15,6 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
-            //    D();
-
-            //     for (int i = 0; i < 30000; i++)
-            //     {
-            //      Console.WriteLine("XXXXXXXXXXXX ");
-            //      }
-            // E();
-
             Console.WriteLine("call method (select letter):");
            var strRead = Console.ReadKey().Key.ToString();
 
@@ -35,26 +27,17 @@ namespace ConsoleApplication2
 
         }
         public string First { get; } = "Jane";
-        //call direct 
-        public static void F() => Console.WriteLine("Lambda method call");
         
 
         //async task stuff
         public static async void D()
         {
             long q = await DoStuff();
-            string a = "Alex B";
+            string a = "InsertedString1";
             string b = "nanaaa";
             var s = $"{a} is {b}";
-            //  First = "LOL";
 
             WriteLine($"RESULT: {q} string: {s}");
-            //  string x = null;
-            //   if (x == null) throw new ArgumentNullException(nameof(x));
-
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict["Steaua"] = "aaa";
-
         }
 
       static async Task<long> DoStuff()
@@ -96,6 +79,21 @@ namespace ConsoleApplication2
             Console.WriteLine($"serialized json {json}");
             Console.WriteLine($"deserialized data in converted json {account2.Email}");
         }
+
+        //call direct 
+        public static void F() => Console.WriteLine("Lambda method call");
+
+        //Null-Conditional Operator ('optional' values, a la Swift)
+        static Account testAcc = null;
+        public static void G()
+        {
+            Console.WriteLine("Starting...");
+           //crashes //   Console.WriteLine(testAcc.GetSomeStringMethod());
+            Console.WriteLine(testAcc?.GetSomeStringMethod()); //doesn't print anyting
+            string testStr = testAcc?.GetSomeStringMethod() ?? "INITed String"; // if not, then ( cond ? action : reaction)
+            testAcc = new Account();
+            Console.WriteLine(testAcc?.GetSomeStringMethod());
+        }
     }
 
     public class Account : IDisposable
@@ -104,6 +102,8 @@ namespace ConsoleApplication2
     public bool Active { get; set; }
     public DateTime CreatedDate { get; set; }
     public IList<string> Roles { get; set; }
+
+        public string GetSomeStringMethod() => "some string";
 
         ~Account()
         {
